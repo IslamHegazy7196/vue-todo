@@ -1,17 +1,33 @@
 <template>
   <div class="container">
-    <Header />
+    <Header @toggle-add-task="toggleAddTask" title="Task Tracker" :showAddTask="showAddTask" />
+
+    <router-view :showAddTask="showAddTask">
+    </router-view>
+    <Footer />
   </div>
 </template>
 
 <script>
-import Header from './components/Header.vue'
+import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
 export default {
-  name:'App',
-  components:{
+  name: "App",
+  components: {
     Header,
+    Footer
   },
-}
+  data() {
+    return {
+      showAddTask: true,
+    };
+  },
+  methods: {
+    toggleAddTask() {
+      this.showAddTask = !this.showAddTask
+    },
+  }
+};
 </script>
 
 <style>
@@ -20,9 +36,11 @@ export default {
   margin: 0;
   padding: 0;
 }
+
 body {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
+
 .container {
   max-width: 500px;
   margin: 30px auto;
@@ -32,6 +50,7 @@ body {
   padding: 30px;
   border-radius: 5px;
 }
+
 .btn {
   display: inline-block;
   background: #000;
@@ -45,12 +64,15 @@ body {
   font-size: 15px;
   font-family: inherit;
 }
+
 .btn:focus {
   outline: none;
 }
+
 .btn:active {
   transform: scale(0.98);
 }
+
 .btn-block {
   display: block;
   width: 100%;
